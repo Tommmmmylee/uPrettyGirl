@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+
+	.wrap{
+		width: 80%;
+		border: 5px solid black;
+		overflow: hidden;
+		margin: auto;
+	}
+	.wrap div{
+		width: 32%;	
+		height: 100px;
+		background: blue;
+		float: left;
+		font-size: 50px;
+		text-align: center;	
+		margin-bottom: 20px;
+
+	}
+	.wrap .m{
+		margin: 0 2% 20px;
+	}
+	@media screen and (min-width: 640px) and (max-width: 960px){
+		.wrap div{
+			width: 49%;
+		}
+		.wrap .m{
+			margin: 0;
+		}
+		.wrap .d1{
+			margin-right: 2%;
+		}
+	}
+	@media screen  and (max-width: 640px){
+		.wrap div{
+			width: 100%
+		}
+		.wrap .m{
+			margin: 0 0 20px;
+		}
+		.wrap .d1{
+			margin-right: 0;
+		}
+	}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="d1">1</div>
+		<div class="m">2</div>
+		<div class="d1">3</div>
+		<div>4</div>
+		<div class="m d1">5</div>
+		<div>6</div>
+	</div>
+</body>
+</html>
