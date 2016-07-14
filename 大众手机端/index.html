@@ -11,31 +11,36 @@
 	</head>
 	<body>
 		<div id="mask">
+			<div id="big">
+				<div id="small"></div>
+			</div>
 			<p>0%</p>
+		</div>
+		<div class="inner1">
+			<img src="img/logo.png" alt="" />
 		</div>
 		<div class="swiper-container">
        	 	<div class="swiper-wrapper">
            		<div class="swiper-slide slide1">
-           			<!--。。。。。。。第一页。。。。。。。-->
-           			<div class="inner1">
-           				<img src="img/logo.png" alt="" />
-           			</div>
+           			<!--。。。。。。。第一页。。。。。。。-->         
            			<div class="inner2 ani" swiper-animate-effect="swing" swiper-animate-duration="2.5s" swiper-animate-delay="0.1s">
            				<img src="img/bg11.png" alt=""/>
            			</div>
            			<div class="inner3 ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="1s" swiper-animate-delay="0.8s">
            				<img src="img/car.png" alt=""/>
+           				<div class="turn ani" swiper-animate-effect="rotateIn" swiper-animate-duration="1s" swiper-animate-delay="0.8s">
+           					<img src="img/lun.png"/>
+           				</div>
            			</div>
            			<div class="inner4 ani" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="1.2s">
-           				<p>剑拔弩张的对峙，更是英雄相惜的跃跃欲试。<br />驭见高尔夫R-Line,遇见另一个自己。</p>
-           				
+           				<p>剑拔弩张的对峙，更是英雄相惜的跃跃欲试。<br />驭见高尔夫R-Line,遇见另一个自己。</p>         				
            			</div>
            		</div>
            		<!--。。。。。。。第二页。。。。。。。-->
             		<div class="swiper-slide slide2">
-            			<div class="inner1">
+            			<!--<div class="inner1">
            				<img src="img/logo.png" alt="" />
-           			</div>
+           			</div>-->
            			<div class="inner2 ani" swiper-animate-effect="bounceInDown" swiper-animate-duration="1s" swiper-animate-delay="0.1s">
            				<img src="img/bg21.png" alt=""/>
            			</div>
@@ -55,9 +60,9 @@
             		</div>           			
             		<!--。。。。。。。第三页。。。。。。。-->
             		<div class="swiper-slide slide3">
-            			<div class="inner1">
+            			<!--<div class="inner1">
            				<img src="img/logo.png" alt="" />
-           			</div>
+           			</div>-->
            			<div class="inner2 ani" swiper-animate-effect="rotateInDownRight" swiper-animate-duration="1s" swiper-animate-delay="0.1s">
            				<img src="img/bg31.png" alt=""/>
            			</div>
@@ -75,9 +80,9 @@
             		</div>
             		<!--。。。。。。。第四页。。。。。。。-->
             		<div class="swiper-slide slide4">
-            			<div class="inner1">
+            			<!--<div class="inner1">
            				<img src="img/logo.png" alt="" />
-           			</div>
+           			</div>-->
            			<div class="inner2 ani" swiper-animate-effect="bounceInUp" swiper-animate-duration="2s" swiper-animate-delay="0.1s">
            				<img src="img/bg41.jpg" alt=""/>
            			</div>
@@ -99,9 +104,9 @@
             		</div>
             		<!--。。。。。。。第五页。。。。。。。-->
             		<div class="swiper-slide slide5">
-            			<div class="inner1">
+            			<!--<div class="inner1">
            				<img src="img/logo.png" alt="" />
-           			</div>
+           			</div>-->
            			<div class="inner2 ani" swiper-animate-effect="wobble" swiper-animate-duration="1s" swiper-animate-delay="0.3s">
            				<img src="img/bg51.png" alt=""/>
            			</div>
@@ -118,19 +123,73 @@
 	<script src="js/touch-0.2.14.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="js/swiper.animate1.0.2.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/onload.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script type="text/javascript">
-		var swiper = new Swiper('.swiper-container',{
-			onInit: function(swiper){ //Swiper2.x的初始化是onFirstInit
-			    swiperAnimateCache(swiper); //隐藏动画元素 
-			    swiperAnimate(swiper); //初始化完成开始动画
-			  }, 
-			  onSlideChangeEnd: function(swiper){ 
-			    swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
-			  } ,
-			paginationClickable:true,
-			direction:'vertical',
-		})
+		window.onload = function(){//加载结构
+			fn();
+		}
 		
+		function pretty(){
+			var swiper = new Swiper('.swiper-container',{
+				onInit: function(swiper){ //Swiper2.x的初始化是onFirstInit
+				    swiperAnimateCache(swiper); //隐藏动画元素 
+				    swiperAnimate(swiper); //初始化完成开始动画
+				  }, 
+				  onSlideChangeEnd: function(swiper){ 
+				    swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+				  },
+				paginationClickable:true,
+				direction:'vertical',
+			})
+		}
+					
+		
+		function fn(){
+			// 预加载
+			// 得到所有的图片
+			var imgs = document.getElementsByTagName("img");
+			// 得到遮罩层元素
+			var mask = document.getElementById("mask");
+			//得到加载条big
+			var big = document.getElementById('big');
+			//得到加载条small
+			var small = document.getElementById("small");
+			// 得到p元素
+			var p = mask.getElementsByTagName("p")[0];
+			// 得到body
+			var body = document.getElementsByTagName("body")[0];
+
+			// 百分比
+			var percent = 0;
+			// 表示已经加载了多少张图片
+			var num = 0;
+	
+			for(var i = 0; i < imgs.length; i++){
+				// 创建图片对象
+				var img = new Image();
+				// 赋予地址
+				img.src = imgs[i].src;
+				// img.onload,当图片加载完后执行function方法
+				img.onload = function(){
+					num++;
+					// 计算百分比
+					percent = parseInt((num / imgs.length)*100);
+					
+					//改变small的宽度
+					small.style.width = percent + "%";
+					// 改变p里面的值
+					p.innerText = percent + "%";
+					alert(percent);
+					console.log(p.innerText);
+					// 判断是否加载完所有图片
+					if(num == imgs.length){
+						mask.style.display = "none";
+						body.style.overflow = "auto";
+						pretty();
+					}
+				}
+			}			
+		}
 	</script>
+	
 </html>
